@@ -1,0 +1,44 @@
+{
+  "nodes": {
+    "cloudlog": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1632074541,
+        "narHash": "sha256-il0D64hC+WGu43ltcNTAJ4opDOSNuECbiDXGZ0nLwoM=",
+        "owner": "magicbug",
+        "repo": "Cloudlog",
+        "rev": "4cfc4451e6c2d019eefabe07a0abb700b84d6ade",
+        "type": "github"
+      },
+      "original": {
+        "owner": "magicbug",
+        "repo": "Cloudlog",
+        "type": "github"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1632342741,
+        "narHash": "sha256-8q12+qSkpVy+up1oGF2PeafBRLSslrUESRTdjn5y8u0=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "5c8efd0034e2f7565ff81a8897ca9dd761889265",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "release-21.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "cloudlog": "cloudlog",
+        "nixpkgs": "nixpkgs"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
