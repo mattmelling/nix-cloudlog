@@ -18,6 +18,9 @@
         cloudlog = pkgs.callPackage ./tests/cloudlog.nix {
           inherit self nixpkgs;
         };
+        cloudlog-lotwsync = pkgs.callPackage ./tests/cloudlog-lotwsync.nix {
+          inherit self nixpkgs;
+        };
       };
     };
   in rec {
@@ -25,6 +28,9 @@
       cloudlog = {
         imports = [ ./modules/cloudlog.nix ];
         nixpkgs.overlays = [ overlay ];
+      };
+      cloudlog-lotwsync = {
+        imports = [ ./modules/cloudlog-lotwsync.nix ];
       };
     };
     hydraJobs = {
