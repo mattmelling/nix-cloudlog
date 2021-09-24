@@ -10,13 +10,16 @@ in test.simpleTest {
       self.nixosModules.cloudlog
     ];
     services = {
-      cloudlog-lotwsync = {
+      cloudlog-rigctl-interface = {
         enable = true;
-        url = "http://localhost/cloudlog";
+        cloudlog = {
+          url = "http://localhost/cloudlog";
+          key = "/tmp/cloudlog";
+        };
       };
     };
   };
   testScript = ''
-    machine.wait_for_unit('cloudlog-lotwsync.timer')
+    machine.wait_for_unit('cloudlog-rigctl-interface.service')
   '';
 }

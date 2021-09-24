@@ -16,6 +16,22 @@
         "type": "github"
       }
     },
+    "cloudlog-rigctl-interface": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1545084277,
+        "narHash": "sha256-Az8CN7B+hq6blnmx7hqAPYTELeabppC0FmMPXt2STYI=",
+        "owner": "Manawyrm",
+        "repo": "cloudlog-rigctl-interface",
+        "rev": "4ded5659699af099c98330b17432f4c581bf60b5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Manawyrm",
+        "repo": "cloudlog-rigctl-interface",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1632342741,
@@ -35,6 +51,7 @@
     "root": {
       "inputs": {
         "cloudlog": "cloudlog",
+        "cloudlog-rigctl-interface": "cloudlog-rigctl-interface",
         "nixpkgs": "nixpkgs"
       }
     }

@@ -54,3 +54,22 @@ This is a simple cronjob-style job that triggers Cloudlog to syncronise with LOT
   };
 }
 #+END_SRC
+
+* Cloudlog rigtctl interface
+Updates Cloudlog with the rig's current interface.
+
+#+BEGIN_SRC nix
+{
+  services.cloudlog-rigctl-interface = {
+    rigctl = {
+      host = "localhost";
+      port = 4532;
+    };
+    cloudlog = {
+      url = "http://localhost/cloudlog";
+      key = "/run/secrets/cloudlog";
+    };
+    radio = "Radio Name";
+  };
+}
+#+END_SRC
