@@ -27,7 +27,11 @@ let
     ${cfgOptions}
     date_default_timezone_set($config['time_reference']);
   '';
-  databaseFile = pkgs.writeText "database.php" ''
+  databaseFile = let
+    password = if cfg.mysql.passwordFile != null
+               then "file_get_contents('${cfg.mysql.passwordFile}')"
+               else "'${cfg.mysql.password}'";
+  in pkgs.writeText "database.php" ''
     <?php
     defined('BASEPATH') OR exit('No direct script access allowed');
     $active_group = 'default';
@@ -37,7 +41,7 @@ let
       'dsn' => "",
       'hostname' => '${cfg.mysql.host}',
       'username' => '${cfg.mysql.username}',
-      'password' => "${cfg.mysql.password}",
+      'password' => ${password},
       'database' => '${cfg.mysql.database}',
       // The following values can probably stay the same.
       'dbdriver' => 'mysqli',
