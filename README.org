@@ -1,0 +1,56 @@
+[[https://github.com/magicbug/Cloudlog][Cloudlog]] + utilities packaged for [[https://nixos.org][NixOS]].
+
+* Cloudlog
+#+BEGIN_QUOTE
+ Web based amateur radio logging application built using PHP & MySQL supports general station logging tasks from HF to Microwave with supporting applications to support CAT control. 
+#+END_QUOTE
+
+With automatic MySQL provisioning:
+#+BEGIN_SRC nix
+{
+  services = {
+    cloudlog = {
+      enable = true;
+      # This causes the flake to provision a MySQL database using PAM
+      # authentication
+      mysql.enable = true;
+    };
+    # Any of the available MySQL packages should work
+    mysql.package = pkgs.mariadb;
+  }
+}
+#+END_SRC
+
+With your existing MySQL database:
+
+#+BEGIN_SRC nix
+{
+  services = {
+    cloudlog = {
+      enable = true;
+      mysql = {
+        enable = false;
+        hostname = "mysql.local";
+        database = "cloudlog";
+        username = "cloudlog";
+        password = "secret";
+        # This option might be useful if you have a secrets manager
+        # passwordFile = "/run/secrets/cloudlog";
+      };
+    };
+  }
+}
+#+END_SRC
+
+* Cloudlog LOTW Sync
+This is a simple cronjob-style job that triggers Cloudlog to syncronise with LOTW.
+
+#+BEGIN_SRC nix
+{
+  services.cloudlog-lotwsync = {
+    enable = true;
+    url = "http://localhost/cloudlog";
+    schedule = "*-*-* 00/3:00:00";
+  };
+}
+#+END_SRC
