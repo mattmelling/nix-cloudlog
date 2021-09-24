@@ -285,28 +285,6 @@ in
             # include ${config.services.nginx.package}/conf/fastcgi.conf;
             # include ${config.services.nginx.package}/conf/fastcgi_params;
           '';
-          # locations."/" = {
-          #   root = "${pkg}";
-          #   index = "index.php";
-          #   extraConfig = ''
-          #     include ${pkgs.nginx}/conf/fastcgi_params;
-          #     
-          #     
-          #     fastcgi_pass unix:${config.services.phpfpm.pools.${cfg.pool}.socket};
-          #     fastcgi_param SCRIPT_FILENAME ${pkg}/index.php;
-            
-
-
-          # };
-          # locations."~ ^/index.php(/|$)" = {
-          #   extraConfig = ''
-          #     include ${pkgs.nginx}/conf/fastcgi_params;
-          #     fastcgi_index index.php;
-          #     fastcgi_split_path_info ^(.+\.php)(/.+)$;
-          #     fastcgi_pass unix:${config.services.phpfpm.pools.${cfg.pool}.socket};
-          #     fastcgi_param SCRIPT_FILENAME ${pkg}/index.php;
-          #   '';
-          # };
         };
       };
     };
