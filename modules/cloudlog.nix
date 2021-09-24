@@ -235,7 +235,7 @@ in
         default = "";
       };
       passwordFile = mkOption {
-        type = types.str;
+        type = types.nullOr types.str;
         description = "MySQL user password file";
         default = null;
       };
