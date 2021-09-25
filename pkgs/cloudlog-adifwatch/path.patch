@@ -1,0 +1,13 @@
+diff --git a/src/main.rs b/src/main.rs
+index 8d3d541..a9c98d7 100644
+--- a/src/main.rs
++++ b/src/main.rs
+@@ -121,7 +121,7 @@ fn read_key(path: &str) -> io::Result<String> {
+ 
+ /// Construct QSO API URL
+ fn api_url(base: &str) -> Result<Url, url::ParseError> {
+-	Ok(Url::parse(base)?.join("/api/qso")?)
++	Ok(Url::parse(base)?.join("/cloudlog/index.php/api/qso")?)
+ }
+ 
+ fn main() -> io::Result<()> {

@@ -4,7 +4,7 @@ let
     system = "x86_64-linux";
   };
 in test.simpleTest {
-  name = "cloudlog-lotwsync";
+  name = "cloudlog-rigctl-interface";
   machine = { ... }: {
     imports = [
       self.nixosModules.cloudlog

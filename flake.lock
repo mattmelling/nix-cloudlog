@@ -16,6 +16,23 @@
         "type": "github"
       }
     },
+    "cloudlog-adifwatch": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1614536202,
+        "narHash": "sha256-CYIiWjZ5PIZfu54da7SGtVrRRu2dZ44AVVECQPn3jBc=",
+        "owner": "illdefined",
+        "repo": "cloudlog-adifwatch",
+        "rev": "07acf5989dd2bebaea41574bd67a467982d3f851",
+        "type": "github"
+      },
+      "original": {
+        "owner": "illdefined",
+        "ref": "07acf5989dd2bebaea41574bd67a467982d3f851",
+        "repo": "cloudlog-adifwatch",
+        "type": "github"
+      }
+    },
     "cloudlog-rigctl-interface": {
       "flake": false,
       "locked": {
@@ -51,6 +68,7 @@
     "root": {
       "inputs": {
         "cloudlog": "cloudlog",
+        "cloudlog-adifwatch": "cloudlog-adifwatch",
         "cloudlog-rigctl-interface": "cloudlog-rigctl-interface",
         "nixpkgs": "nixpkgs"
       }
