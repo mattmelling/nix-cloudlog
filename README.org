@@ -1,6 +1,10 @@
 [[https://github.com/magicbug/Cloudlog][Cloudlog]] + utilities packaged for [[https://nixos.org][NixOS]].
 
-* Cloudlog
+* Flake
+ This flake exposes an overlay containing the required packages as well as the modules listed below. For convenience, an extra module named ~all~ includes all the other modules.
+
+* Modules
+** [[https://github.com/magicbug/Cloudlog][Cloudlog]]
 #+BEGIN_QUOTE
  Web based amateur radio logging application built using PHP & MySQL supports general station logging tasks from HF to Microwave with supporting applications to support CAT control. 
 #+END_QUOTE
@@ -14,10 +18,15 @@ With automatic MySQL provisioning:
       # This causes the flake to provision a MySQL database using PAM
       # authentication
       mysql.enable = true;
+      config = {
+        base_url = "http://localhost/cloudlog";
+        cloudlog_option = value;
+        ... = ...;
+      };
     };
     # Any of the available MySQL packages should work
     mysql.package = pkgs.mariadb;
-  }
+  };
 }
 #+END_SRC
 
@@ -28,6 +37,7 @@ With your existing MySQL database:
   services = {
     cloudlog = {
       enable = true;
+      config = { ... };
       mysql = {
         enable = false;
         hostname = "mysql.local";
@@ -38,12 +48,12 @@ With your existing MySQL database:
         # passwordFile = "/run/secrets/cloudlog";
       };
     };
-  }
+  };
 }
 #+END_SRC
 
-* Cloudlog LOTW Sync
-This is a simple cronjob-style job that triggers Cloudlog to syncronise with LOTW.
+** cloudlog-lotw-sync
+This is a simple cronjob-style job that triggers Cloudlog to syncronise with [[https://lotw.arrl.org/lotwuser/default][ARRL's LogBook Of The World]].
 
 #+BEGIN_SRC nix
 {
@@ -55,8 +65,10 @@ This is a simple cronjob-style job that triggers Cloudlog to syncronise with LOT
 }
 #+END_SRC
 
-* Cloudlog rigtctl interface
-Updates Cloudlog with the rig's current interface.
+** [[https://github.com/Manawyrm/cloudlog-rigctl-interface][cloudlog-rigtctl-interface]]
+#+BEGIN_QUOTE
+Connects Cloudlog to rigctld / hamlib via PHP. This allows you to automatically log the used frequency and mode in Cloudlog's Live QSO menu.
+#+END_QUOTE
 
 #+BEGIN_SRC nix
 {
@@ -70,6 +82,27 @@ Updates Cloudlog with the rig's current interface.
       key = "/run/secrets/cloudlog";
     };
     radio = "Radio Name";
+  };
+}
+#+END_SRC
+
+** [[https://github.com/illdefined/cloudlog-adifwatch][cloudlog-adifwatch]]
+#+BEGIN_QUOTE
+This tool watches an ADIF log file for changes using the native filesystem notification mechanism and uploads it to a Cloudlog instance through the QSO API.
+#+END_QUOTE
+
+#+BEGIN_SRC nix
+{
+  services.cloudlog-adifwatch = {
+    enable = true;
+    key = "/run/secrets/cloudlog";
+    host = "http://localhost/cloudlog";
+    watchers = {
+      wsjtx = "/path/to/wsjtx/adif";
+      fldigi = "/path/to/fldigi/adif";
+      js8call = "/path/to/js8call/adif"
+      ... = ...;
+    };
   };
 }
 #+END_SRC
