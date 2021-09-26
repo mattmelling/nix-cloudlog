@@ -52,8 +52,23 @@
       cloudlog = {
         imports = [
           ./modules/cloudlog.nix
+        ];
+        nixpkgs.overlays = [ self.overlay ];
+      };
+      cloudlog-lotwsync = {
+        imports = [
           ./modules/cloudlog-lotwsync.nix
+        ];
+        nixpkgs.overlays = [ self.overlay ];
+      };
+      cloudlog-rigctl-interface = {
+        imports = [
           ./modules/cloudlog-rigctl-interface.nix
+        ];
+        nixpkgs.overlays = [ self.overlay ];
+      };
+      cloudlog-adifwatch = {
+        imports = [
           ./modules/cloudlog-adifwatch.nix
         ];
         nixpkgs.overlays = [ self.overlay ];
