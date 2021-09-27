@@ -29,7 +29,7 @@ let
   '';
   databaseFile = let
     password = if cfg.mysql.passwordFile != null
-               then "file_get_contents('${cfg.mysql.passwordFile}')"
+               then "trim(file_get_contents('${cfg.mysql.passwordFile}'))"
                else "'${cfg.mysql.password}'";
   in pkgs.writeText "database.php" ''
     <?php
