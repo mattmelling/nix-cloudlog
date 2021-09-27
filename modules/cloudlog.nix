@@ -268,23 +268,24 @@ in
       enable = true;
       virtualHosts = {
         "${cfg.virtualHost}" = {
-          locations."/".extraConfig = ''
-            rewrite ^ /index.php;
-          '';
-          locations."~ \\.php$".extraConfig = ''
+          locations."/" = {
+            root = "${pkg}";
+            index = "index.php";
+          };
+          locations."~ ^/index.php(/|$)".extraConfig = ''
             include ${config.services.nginx.package}/conf/fastcgi_params;
             fastcgi_index index.php;
             fastcgi_split_path_info ^(.+\.php)(/.+)$;
             fastcgi_pass unix:${config.services.phpfpm.pools.${cfg.pool}.socket};
             fastcgi_param SCRIPT_FILENAME ${pkg}/index.php;
-
-            # fastcgi_split_path_info ^(.+\.php)(/.+)$;
-            # fastcgi_pass unix:${config.services.phpfpm.pools.${cfg.pool}.socket};
-            # fastcgi_index index.php;
-            # fastcgi_param SCRIPT_FILENAME ${pkg}/index.php;
-            # include ${config.services.nginx.package}/conf/fastcgi.conf;
-            # include ${config.services.nginx.package}/conf/fastcgi_params;
           '';
+          locations."~ \.(ico|js|css|png|ttf|woff|woff2)" = {
+            root = pkg;
+            extraConfig = ''
+              log_not_found off;
+              try_files $uri $uri/;
+            '';
+          };
         };
       };
     };
