@@ -275,7 +275,7 @@ in
           locations."~ ^/index.php(/|$)".extraConfig = ''
             include ${config.services.nginx.package}/conf/fastcgi_params;
             fastcgi_index index.php;
-            fastcgi_split_path_info ^(.+\.php)(/.+)$;
+            fastcgi_split_path_info ^(.+\.php)(.+)$;
             fastcgi_pass unix:${config.services.phpfpm.pools.${cfg.pool}.socket};
             fastcgi_param SCRIPT_FILENAME ${pkg}/index.php;
           '';
@@ -283,7 +283,7 @@ in
             root = pkg;
             extraConfig = ''
               log_not_found off;
-              try_files $uri $uri/;
+              try_files $uri $uri/ /index.php;
             '';
           };
         };
