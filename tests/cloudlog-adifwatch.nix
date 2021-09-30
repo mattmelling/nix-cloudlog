@@ -7,7 +7,7 @@ in test.simpleTest {
   name = "cloudlog-adifwatch";
   machine = { ... }: {
     imports = [
-      self.nixosModules.cloudlog
+      self.nixosModules.cloudlog-adifwatch
     ];
     services = {
       cloudlog-adifwatch = {

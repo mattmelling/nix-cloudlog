@@ -7,7 +7,7 @@ in test.simpleTest {
   name = "cloudlog-lotwsync";
   machine = { ... }: {
     imports = [
-      self.nixosModules.cloudlog
+      self.nixosModules.cloudlog-lotwsync
     ];
     services = {
       cloudlog-lotwsync = {

@@ -7,7 +7,7 @@ in test.simpleTest {
   name = "cloudlog-rigctl-interface";
   machine = { ... }: {
     imports = [
-      self.nixosModules.cloudlog
+      self.nixosModules.cloudlog-rigctl-interface
     ];
     services = {
       cloudlog-rigctl-interface = {
